@@ -18,14 +18,12 @@ import (
 	"time"
 )
 
-// Config структура для конфигурации балансировщика
 type Config struct {
 	Port      int      `json:"port"`
 	Backends  []string `json:"backends"`
 	Algorithm string   `json:"algorithm"` // "round-robin", "least-connections", "random"
 }
 
-// BackendStatus хранит информацию о состоянии бэкенда
 type BackendStatus struct {
 	URL          *url.URL
 	Alive        bool
@@ -35,7 +33,6 @@ type BackendStatus struct {
 	ResponseTime time.Duration
 }
 
-// LoadBalancer основной объект балансировщика
 type LoadBalancer struct {
 	backends     []*BackendStatus
 	algorithm    string
@@ -53,7 +50,7 @@ var (
 func init() {
 	flag.StringVar(&configFile, "config", "config.json", "Path to config file")
 	flag.Parse()
-	rand.NewSource(time.Now().UnixNano())
+	rand.NewSource(time.Now().UnixNano()) //используется для алгоритма случайного распределения запросов (random).
 }
 
 func main() {
