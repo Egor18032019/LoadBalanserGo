@@ -53,7 +53,7 @@ var (
 func init() {
 	flag.StringVar(&configFile, "config", "config.json", "Path to config file")
 	flag.Parse()
-	rand.Seed(time.Now().UnixNano())
+	rand.NewSource(time.Now().UnixNano())
 }
 
 func main() {
